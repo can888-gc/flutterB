@@ -37,10 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() async {
     TestRequest request = TestRequest();
+    request.add("requestPrams", "111");
     request.add("aa", "dd");
     try {
       var result = await HiNet.getInstance().fire(request);
-      print(result);
     } on NeedAuth catch (e) {
       print(e);
     } on NeedLogin catch (e) {

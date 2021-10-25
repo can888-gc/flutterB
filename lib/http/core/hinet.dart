@@ -1,4 +1,5 @@
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_bilibili/http/core/adapter/dioadapter.dart';
 import 'package:flutter_bilibili/http/core/adapter/hiadapter.dart';
 import 'package:flutter_bilibili/http/core/hierror.dart';
 import 'package:flutter_bilibili/http/core/adapter/mockadapter.dart';
@@ -44,12 +45,7 @@ class HiNet {
   }
 
   Future<dynamic> send<T>(BaseRequest request) async {
-    HiNetAdapter adapter = MockAdapter();
-
-    printLog("请求的Uri==>${request.url()}");
-    printLog("请求方式==>${request.httpMethod()}");
-    request.addHeader("token", "123");
-    printLog("header==>${request.header}");
+    HiNetAdapter adapter = DioAdapter();
     return adapter.send(request);
   }
 
