@@ -17,6 +17,7 @@ class HiNet {
     HiNetResponse? response;
     var error;
     try {
+      printLog("目标-->${request.url()}");
       response = await send(request);
     } on HiNetError catch (e) {
       error = e;
@@ -26,11 +27,11 @@ class HiNet {
       error = e;
       printLog(e);
     }
-    if (response == null) {
+    if (error != null) {
       printLog(error);
     }
     var result = response?.data;
-    printLog(result);
+    printLog("结果-->${result}");
     var status = response?.statusCode;
     switch (status) {
       case 200:

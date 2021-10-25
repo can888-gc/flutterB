@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bilibili/http/core/hierror.dart';
 import 'package:flutter_bilibili/http/core/hinet.dart';
@@ -36,18 +38,30 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() async {
-    TestRequest request = TestRequest();
-    request.add("requestPrams", "111");
-    request.add("aa", "dd");
-    try {
-      var result = await HiNet.getInstance().fire(request);
-    } on NeedAuth catch (e) {
-      print(e);
-    } on NeedLogin catch (e) {
-      print(e);
-    } on HiNetError catch (e) {
-      print(e);
-    }
+    // TestRequest request = TestRequest();
+    // request.add("requestPrams", "111");
+    // request.add("aa", "dd");
+    // try {
+    //   var result = await HiNet.getInstance().fire(request);
+    // } on NeedAuth catch (e) {
+    //   print(e);
+    // } on NeedLogin catch (e) {
+    //   print(e);
+    // } on HiNetError catch (e) {
+    //   print(e);
+    // }
+    test();
+  }
+
+  void test(){
+    const jsonString =  "{ \"name\": \"flutter\", \"url\": \"https://coding.imooc.com/class/487.html\" }";
+    //json转Map
+    Map<String,dynamic> jsonMap = jsonDecode(jsonString);
+    print('name:${jsonMap['name']}');
+    print('url:${jsonMap['url']}');
+    //map转Json
+    String json = jsonEncode(jsonMap);
+    print('json:${json}');
   }
 
   @override
