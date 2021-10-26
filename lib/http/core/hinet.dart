@@ -46,8 +46,8 @@ class HiNet {
   }
 
   Future<dynamic> send<T>(BaseRequest request) async {
-    // HiNetAdapter adapter = DioAdapter();
-    HiNetAdapter adapter = HttpAdapter();
+    HiNetAdapter adapter = DioAdapter();
+    // HiNetAdapter adapter = HttpAdapter();
     return adapter.send(request);
   }
 

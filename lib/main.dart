@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bilibili/db/hicache.dart';
 import 'package:flutter_bilibili/http/core/hierror.dart';
 import 'package:flutter_bilibili/http/core/hinet.dart';
+import 'package:flutter_bilibili/http/dao/login_dao.dart';
 import 'package:flutter_bilibili/http/request/testrequest.dart';
 
 void main() {
@@ -45,22 +46,51 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _incrementCounter() async {
-    TestRequest request = TestRequest();
-    request.add("2", "111");
-    request.add("aa", "dd");
-    try {
-      var result = await HiNet.getInstance().fire(request);
-    } on NeedAuth catch (e) {
-      print(e);
-    } on NeedLogin catch (e) {
-      print(e);
-    } on HiNetError catch (e) {
-      print(e);
-    }
+    // TestRequest request = TestRequest();
+    // request.add("2", "111");
+    // request.add("aa", "dd");
+    // try {
+    //   var result = await HiNet.getInstance().fire(request);
+    // } on NeedAuth catch (e) {
+    //   print(e);
+    // } on NeedLogin catch (e) {
+    //   print(e);
+    // } on HiNetError catch (e) {
+    //   print(e);
+    // }
     // test();
     // test2();
+    testLogin();
+    // testRegistration();
   }
 
+  void testRegistration()async{
+    try{
+      var result = await LoginDao.registration("can", "123456", "6222998", "2734");
+      print(result);
+    } on NeedAuth catch(e){
+      print(e);
+    }on NeedLogin catch(e){
+      print(e);
+    }on HiNetError catch(e){
+      print(e);
+    }
+  }
+
+  void testLogin() async {
+    try{
+      var result = await LoginDao.login("can", "123456");
+      print(result);
+    } on NeedAuth catch(e){
+      print(e);
+    }on NeedLogin catch(e){
+      print(e);
+    }on HiNetError catch(e){
+      print(e);
+    }
+
+  }
+  
   void test2(){
     HiCache.getInstance().setString("name", "cancan");
     var nameStr = HiCache.getInstance().get("name");

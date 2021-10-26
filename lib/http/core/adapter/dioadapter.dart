@@ -23,18 +23,18 @@ class DioAdapter extends HiNetAdapter{
       response = e.response;
     }
     if(error != null){
-      throw HiNetError(response?.statusCode ?? -1, error.toString(),data: buildRes(response,request));
+      throw HiNetError(response?.statusCode ?? -1, error.toString(),data: await buildRes(response,request));
     }
 
     return buildRes(response,request);
   }
   //构建返回数据
-  Future<HiNetResponse<T>> buildRes<T>(Response response, BaseRequest request) {
+  Future<HiNetResponse<T>> buildRes<T>(Response? response, BaseRequest request) {
     return Future.value(HiNetResponse(
-        data: response.data,
+        data: response?.data,
         request: request,
-        statusCode: response.statusCode,
-        statusMessage: response.statusMessage,
+        statusCode: response?.statusCode,
+        statusMessage: response?.statusMessage,
         extra: response
     ));
   }
