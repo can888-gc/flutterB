@@ -50,7 +50,7 @@ abstract class BaseRequest {
     return this;
   }
 
-  Map<String, dynamic> header = Map();
+  Map<String, String> header = Map();
   BaseRequest addHeader(String k, String v) {
     header[k] = v.toString();
     return this;

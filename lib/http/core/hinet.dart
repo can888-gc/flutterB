@@ -5,6 +5,8 @@ import 'package:flutter_bilibili/http/core/hierror.dart';
 import 'package:flutter_bilibili/http/core/adapter/mockadapter.dart';
 import 'package:flutter_bilibili/http/request/baserequest.dart';
 
+import 'adapter/http_adapter.dart';
+
 class HiNet {
   HiNet._();
   static HiNet? _instance;
@@ -27,9 +29,7 @@ class HiNet {
       error = e;
       printLog(e);
     }
-    if (error != null) {
-      printLog(error);
-    }
+
     var result = response?.data;
     printLog("结果-->${result}");
     var status = response?.statusCode;
@@ -46,7 +46,8 @@ class HiNet {
   }
 
   Future<dynamic> send<T>(BaseRequest request) async {
-    HiNetAdapter adapter = DioAdapter();
+    // HiNetAdapter adapter = DioAdapter();
+    HiNetAdapter adapter = HttpAdapter();
     return adapter.send(request);
   }
 

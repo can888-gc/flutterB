@@ -25,7 +25,7 @@ class HiCache{
   }
 
   void init() async {
-    prefs ??= await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
   }
 
   void setString(String key,String value){

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bilibili/db/hicache.dart';
 import 'package:flutter_bilibili/http/core/hierror.dart';
 import 'package:flutter_bilibili/http/core/hinet.dart';
 import 'package:flutter_bilibili/http/request/testrequest.dart';
@@ -37,20 +38,33 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  @override
+  void initState() {
+    HiCache.preInit();
+    super.initState();
+  }
+
   void _incrementCounter() async {
-    // TestRequest request = TestRequest();
-    // request.add("requestPrams", "111");
-    // request.add("aa", "dd");
-    // try {
-    //   var result = await HiNet.getInstance().fire(request);
-    // } on NeedAuth catch (e) {
-    //   print(e);
-    // } on NeedLogin catch (e) {
-    //   print(e);
-    // } on HiNetError catch (e) {
-    //   print(e);
-    // }
-    test();
+    TestRequest request = TestRequest();
+    request.add("2", "111");
+    request.add("aa", "dd");
+    try {
+      var result = await HiNet.getInstance().fire(request);
+    } on NeedAuth catch (e) {
+      print(e);
+    } on NeedLogin catch (e) {
+      print(e);
+    } on HiNetError catch (e) {
+      print(e);
+    }
+    // test();
+    // test2();
+  }
+
+  void test2(){
+    HiCache.getInstance().setString("name", "cancan");
+    var nameStr = HiCache.getInstance().get("name");
+    print(nameStr);
   }
 
   void test(){
