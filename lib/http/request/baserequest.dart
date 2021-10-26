@@ -1,3 +1,5 @@
+import 'package:flutter_bilibili/http/dao/login_dao.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 
 //基础的请求类
@@ -37,7 +39,9 @@ abstract class BaseRequest {
     } else {
       uri = Uri.http(authority(), pathStr, params);
     }
-
+    if(needLogin()){
+      addHeader(LoginDao.BOARDING_PASS,LoginDao.getBordingPass());
+    }
     return uri.toString();
   }
 
