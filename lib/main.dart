@@ -5,6 +5,8 @@ import 'package:flutter_bilibili/db/hicache.dart';
 import 'package:flutter_bilibili/http/core/hierror.dart';
 import 'package:flutter_bilibili/http/core/hinet.dart';
 import 'package:flutter_bilibili/http/dao/login_dao.dart';
+import 'package:flutter_bilibili/http/request/baserequest.dart';
+import 'package:flutter_bilibili/http/request/notice_request.dart';
 import 'package:flutter_bilibili/http/request/testrequest.dart';
 
 void main() {
@@ -60,8 +62,23 @@ class _MyHomePageState extends State<MyHomePage> {
     // }
     // test();
     // test2();
-    testLogin();
+    // testLogin();
     // testRegistration();
+    testNotice();
+  }
+
+  void testNotice()async{
+    try{
+      BaseRequest request = NoticeRequest();
+      var result = HiNet.getInstance().fire(request);
+      print(result);
+    } on NeedAuth catch(e){
+      print(e);
+    }on NeedLogin catch(e){
+      print(e);
+    }on HiNetError catch(e){
+      print(e);
+    }
   }
 
   void testRegistration()async{

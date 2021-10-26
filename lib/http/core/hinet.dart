@@ -39,9 +39,9 @@ class HiNet {
       case 401:
         throw NeedLogin();
       case 403:
-        throw NeedAuth(result.toString(), data: result);
+        throw NeedAuth(result.toString(), data: result  ?? "");
       default:
-        throw HiNetError(status ?? -1, result.toString(), data: result);
+        throw HiNetError(status ?? -1, result.toString(),data: result ?? "");
     }
   }
 

@@ -10,7 +10,7 @@ class NeedAuth extends HiNetError {
 }
 
 //网络异常处理的基类
-class HiNetError<T> implements Exception {
+class HiNetError implements Exception {
   final int code;
   final String message;
   final dynamic data;
