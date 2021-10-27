@@ -40,7 +40,7 @@ abstract class BaseRequest {
       uri = Uri.http(authority(), pathStr, params);
     }
     if(needLogin()){
-      addHeader(LoginDao.BOARDING_PASS,LoginDao.getBordingPass());
+      addHeader(LoginDao.BOARDING_PASS,LoginDao.getBordingPass() ?? "");
     }
     return uri.toString();
   }

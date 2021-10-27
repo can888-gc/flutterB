@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
     try{
       BaseRequest request = NoticeRequest();
       var result = HiNet.getInstance().fire(request);
-      print(result);
+      print(request.url());
     } on NeedAuth catch(e){
       print(e);
     }on NeedLogin catch(e){
